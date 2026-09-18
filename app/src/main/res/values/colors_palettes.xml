@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 浅色配色资源；values-night 中同名资源覆盖为暗色 -->
+    <!-- 紫色 -->
+    <color name="pal_purple_primary">#6750A4</color>
+    <color name="pal_purple_onPrimary">#FFFFFF</color>
+    <color name="pal_purple_primaryContainer">#EADDFF</color>
+    <color name="pal_purple_onPrimaryContainer">#21005D</color>
+    <color name="pal_purple_background">#FEF7FF</color>
+    <color name="pal_purple_onSurface">#1D1B20</color>
+    <!-- 蓝色 -->
+    <color name="pal_blue_primary">#4156B8</color>
+    <color name="pal_blue_onPrimary">#FFFFFF</color>
+    <color name="pal_blue_primaryContainer">#DDDEFF</color>
+    <color name="pal_blue_onPrimaryContainer">#000E67</color>
+    <color name="pal_blue_background">#FBFAFF</color>
+    <color name="pal_blue_onSurface">#191B2C</color>
+    <!-- 绿色 -->
+    <color name="pal_green_primary">#006A67</color>
+    <color name="pal_green_onPrimary">#FFFFFF</color>
+    <color name="pal_green_primaryContainer">#6FF7F0</color>
+    <color name="pal_green_onPrimaryContainer">#00201E</color>
+    <color name="pal_green_background">#FBFDFC</color>
+    <color name="pal_green_onSurface">#191C1C</color>
+    <!-- 粉色 -->
+    <color name="pal_pink_primary">#AD1A62</color>
+    <color name="pal_pink_onPrimary">#FFFFFF</color>
+    <color name="pal_pink_primaryContainer">#FFD8E4</color>
+    <color name="pal_pink_onPrimaryContainer">#3E001D</color>
+    <color name="pal_pink_background">#FFF8F8</color>
+    <color name="pal_pink_onSurface">#201920</color>
+    <!-- 橙色 -->
+    <color name="pal_orange_primary">#7C5700</color>
+    <color name="pal_orange_onPrimary">#FFFFFF</color>
+    <color name="pal_orange_primaryContainer">#FFE085</color>
+    <color name="pal_orange_onPrimaryContainer">#271900</color>
+    <color name="pal_orange_background">#FFF8F5</color>
+    <color name="pal_orange_onSurface">#201B10</color>
+</resources>

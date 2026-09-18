@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基于 Material3 DayNight：自动跟随系统暗色模式；
+         不覆盖颜色槽位，Android 12+ 可被 DynamicColors 动态取色覆盖 -->
+    <style name="Theme.QQReplyApp" parent="Theme.Material3.DayNight.NoActionBar" />
+
+    <!-- 下拉磁贴长按弹出的开关面板：透明浮窗，只承载 AlertDialog，不显示 Activity 自身界面 -->
+    <style name="Theme.TilePanel" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowContentTransitions">false</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+</resources>

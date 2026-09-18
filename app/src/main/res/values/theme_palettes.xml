@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自带配色预设：覆盖 Primary 系列颜色槽；
+         颜色资源 pal_*_* 自动按浅色/夜间切换，因此无需重复 style -->
+    <style name="Theme.QQReplyApp.Purple" parent="Theme.QQReplyApp">
+        <item name="colorPrimary">@color/pal_purple_primary</item>
+        <item name="colorOnPrimary">@color/pal_purple_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/pal_purple_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/pal_purple_onPrimaryContainer</item>
+        <item name="android:colorBackground">@color/pal_purple_background</item>
+        <item name="colorSurface">@color/pal_purple_background</item>
+        <item name="colorOnSurface">@color/pal_purple_onSurface</item>
+    </style>
+
+    <style name="Theme.QQReplyApp.Blue" parent="Theme.QQReplyApp">
+        <item name="colorPrimary">@color/pal_blue_primary</item>
+        <item name="colorOnPrimary">@color/pal_blue_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/pal_blue_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/pal_blue_onPrimaryContainer</item>
+        <item name="android:colorBackground">@color/pal_blue_background</item>
+        <item name="colorSurface">@color/pal_blue_background</item>
+        <item name="colorOnSurface">@color/pal_blue_onSurface</item>
+    </style>
+
+    <style name="Theme.QQReplyApp.Green" parent="Theme.QQReplyApp">
+        <item name="colorPrimary">@color/pal_green_primary</item>
+        <item name="colorOnPrimary">@color/pal_green_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/pal_green_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/pal_green_onPrimaryContainer</item>
+        <item name="android:colorBackground">@color/pal_green_background</item>
+        <item name="colorSurface">@color/pal_green_background</item>
+        <item name="colorOnSurface">@color/pal_green_onSurface</item>
+    </style>
+
+    <style name="Theme.QQReplyApp.Pink" parent="Theme.QQReplyApp">
+        <item name="colorPrimary">@color/pal_pink_primary</item>
+        <item name="colorOnPrimary">@color/pal_pink_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/pal_pink_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/pal_pink_onPrimaryContainer</item>
+        <item name="android:colorBackground">@color/pal_pink_background</item>
+        <item name="colorSurface">@color/pal_pink_background</item>
+        <item name="colorOnSurface">@color/pal_pink_onSurface</item>
+    </style>
+
+    <style name="Theme.QQReplyApp.Orange" parent="Theme.QQReplyApp">
+        <item name="colorPrimary">@color/pal_orange_primary</item>
+        <item name="colorOnPrimary">@color/pal_orange_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/pal_orange_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/pal_orange_onPrimaryContainer</item>
+        <item name="android:colorBackground">@color/pal_orange_background</item>
+        <item name="colorSurface">@color/pal_orange_background</item>
+        <item name="colorOnSurface">@color/pal_orange_onSurface</item>
+    </style>
+</resources>

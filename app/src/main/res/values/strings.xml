@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">言出化喵ฅ自动喵语化</string>
+    <string name="tile_label">言出化喵ฅ自动喵语化</string>
+    <string name="accessibility_service_description">言出化喵ฅ自动喵语化 - 自动替换聊天文本内容</string>
+</resources>

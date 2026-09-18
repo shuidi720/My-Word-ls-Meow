@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+}
+
+// 开源版：签名信息从根目录 local.properties 读取（该文件已 gitignore，不入库）。
+// 自行生成 keystore 后在 local.properties 中填入：
+//   keystore.file=signing/your.keystore
+//   keystore.password=xxx
+//   keystore.alias=xxx
+//   keystore.aliasPassword=xxx
+// 未配置时 release 包自动回退到 debug 签名，clone 下来即可直接编译。
+def keystoreProps = new Properties()
+def keystorePropFile = rootProject.file('local.properties')
+if (keystorePropFile.exists()) keystorePropFile.withInputStream { keystoreProps.load(it) }
+def ksFile = keystoreProps['keystore.file']
+
+android {
+    namespace 'io.catpaw.kittytalk'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "io.catpaw.kittytalk"
+        minSdk 26
+        targetSdk 34
+        versionCode 82
+        versionName "1.0.3"
+    }
+
+    signingConfigs {
+        release {
+            if (ksFile) {
+                storeFile file(ksFile)
+                storePassword keystoreProps['keystore.password']
+                keyAlias keystoreProps['keystore.alias']
+                keyPassword keystoreProps['keystore.aliasPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            // 开源版：不混淆、不裁剪，保持代码可读可审计
+            minifyEnabled false
+            shrinkResources false
+            signingConfig ksFile ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    // Shizuku：以 ADB/root 权限执行系统命令，给应用设置系统级白名单，防止后台被杀、无障碍掉线
+    // 注：12.2.0 的 Shizuku.newProcess 为公开 API；13.x 中该方法已变为 private（官方改推 UserService），
+    // 故选用 12.2.0（对 Shizuku 管理器 13.x 向后兼容）
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    ksp 'androidx.room:room-compiler:2.6.1'
+    implementation 'dev.rikka.shizuku:api:12.2.0'
+    implementation 'dev.rikka.shizuku:provider:12.2.0'
+}

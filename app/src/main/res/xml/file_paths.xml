@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 更新包下载到 app 私有缓存目录，用 FileProvider 提供给安装器读取 -->
+    <cache-path
+        name="update_apk"
+        path="update/" />
+</paths>
