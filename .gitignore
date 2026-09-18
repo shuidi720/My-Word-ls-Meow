@@ -1,0 +1,33 @@
+# 本地配置
+local.properties
+*.iml
+.idea/
+.vscode/
+.DS_Store
+
+# 签名文件（绝对不要提交）
+*.keystore
+*.jks
+app/signing/
+signing/
+
+# 构建缓存与产物
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+
+# 反编译/逆向与调试产物
+apk_out/
+wx_dec/
+apktool.jar
+wc.xml
+wx_dump.xml
+backup_icons/
+
+# 独立脚本与临时文件
+build.bat
+
+# 日志
+*.log
