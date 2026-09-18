@@ -40,7 +40,7 @@ class OverlayInput(
 
     companion object {
         private const val PANEL_WIDTH = 320
-        private const val PROCESS_DELAY_MS = 400L
+        private const val PROCESS_DELAY_MS = 50L
         private const val TOAST_MIN_INTERVAL_MS = 2500L
 
         @Volatile
