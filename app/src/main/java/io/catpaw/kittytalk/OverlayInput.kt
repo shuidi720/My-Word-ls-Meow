@@ -46,10 +46,10 @@ class OverlayInput(
         @Volatile
         private var instance: OverlayInput? = null
 
-        /** 悬浮窗当前是否处于“收起成小球”状态：收起时不自动弹出悬浮窗打扰用户 */
+        /** 悬浮窗当前是否处于“收起悬浮窗”状态：收起时不自动弹出悬浮窗打扰用户 */
         fun isCollapsed(): Boolean = instance != null && instance?.expanded == false
 
-        /** 悬浮窗当前是否存在（展开或收起成小球都算打开） */
+        /** 悬浮窗当前是否存在（展开或收起悬浮窗都算打开） */
         fun isOpen(): Boolean = instance != null
 
         /** 全局唯一悬浮窗：任何入口（主界面手动 / 无障碍写入被拦截）都复用同一个实例。
