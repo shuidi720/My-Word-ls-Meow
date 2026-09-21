@@ -148,6 +148,8 @@ class AutomationBridge : AccessibilityService() {
     // 窗口切换标志：切换窗口后首次 doProcess 只同步 lastSet 不处理，
     // 避免切换到已有文本的输入框时自动把用户事先打的字全部变语（Bug6）
     private var justSwitchedWindow = false
+    // 功能开关状态缓存：只在从开到关的瞬间打一次日志，避免关闭后每次事件都刷屏"功能开关已关闭"
+    private var lastFuncOnState = true
 
     /** 窗口切换后延迟读取输入框，同步已有文本状态，避免用户第一次打字被误判为已有文本跳过 */
     private val syncInputStateTask = Runnable {
@@ -474,9 +476,14 @@ class AutomationBridge : AccessibilityService() {
         val funcOn = getSharedPreferences("qq_settings", Context.MODE_PRIVATE)
             .getBoolean("func_enabled", true)
         if (!funcOn) {
-            addLog("功能开关已关闭，跳过替换")
+            // 只在从开到关的瞬间打一次日志，之后关闭状态下不再刷屏
+            if (lastFuncOnState) {
+                addLog("功能开关已关闭，跳过替换")
+                lastFuncOnState = false
+            }
             return
         }
+        lastFuncOnState = true
         // 消费粘贴识别标记：本次变化若是粘贴，标点触发+分句同开时临时按分句处理（随后自动恢复）
         val pasteLike = lastPasteLike
         lastPasteLike = false
