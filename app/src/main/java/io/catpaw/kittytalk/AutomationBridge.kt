@@ -266,6 +266,17 @@ class AutomationBridge : AccessibilityService() {
 
     private fun handleAccessibilityEvent(event: AccessibilityEvent?) {
         if (event == null) return
+        // 功能开关关闭时完全静默：不处理事件、不打日志（只在从开到关瞬间打一条提示）
+        val funcOn = getSharedPreferences("qq_settings", Context.MODE_PRIVATE)
+            .getBoolean("func_enabled", true)
+        if (!funcOn) {
+            if (lastFuncOnState) {
+                addLog("功能开关已关闭，跳过替换")
+                lastFuncOnState = false
+            }
+            return
+        }
+        lastFuncOnState = true
         val pkg = event.packageName?.toString() ?: return
         lastEventPkg = pkg
         // 跳过本应用自身（悬浮窗输入框等）：悬浮窗由 OverlayInput 自己的 TextWatcher 实时处理，
