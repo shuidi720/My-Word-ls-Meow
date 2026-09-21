@@ -24,8 +24,8 @@ android {
         applicationId "io.catpaw.kittytalk"
         minSdk 26
         targetSdk 34
-        versionCode 83
-        versionName "1.0.4"
+        versionCode 84
+        versionName "1.0.5"
     }
 
     signingConfigs {
