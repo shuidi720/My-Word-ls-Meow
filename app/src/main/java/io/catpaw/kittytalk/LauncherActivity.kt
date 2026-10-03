@@ -90,6 +90,7 @@ class LauncherActivity : AppCompatActivity() {
     internal val punctEatPeriodKey = "punct_eat_period"
     internal val sentenceBlockKey = "sentence_block_chars"
     internal val sentenceTriggerKey = "sentence_trigger"
+    internal val atSkipKey = "at_skip"
     internal val shizukuKey = "shizuku_keepalive"
     internal val prefWarningVersion = "warning_version"
     internal val prefLogVisible = "log_visible"
@@ -138,6 +139,7 @@ class LauncherActivity : AppCompatActivity() {
         setupFuncSwitch()
         setupPunctuationSwitch()
         setupSentenceSuffixSwitch()
+        setupAtSkipSwitch()
         setupSuffixControls()
         setupCategoryControls()
         setupListToggles()

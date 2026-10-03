@@ -523,6 +523,20 @@ class AutomationBridge : AccessibilityService() {
                         addLog("找到输入框：raw=\"$raw\" editable=${inputNode.isEditable} cls=${inputNode.className} focused=${inputNode.isFocused}")
                     }
                     if (preCheckSkip(raw, inputNode, isTextChange, pasteLike)) return
+                    // @不喵喵：该开关开启时（默认开启），文本含 @ 一律不触发替换（同步状态），
+                    // 避免@搜索/选人的占位文案和@昵称被误改写、以及@操作期间反复触发。
+                    if (raw.contains("@") && getSharedPreferences("qq_settings", Context.MODE_PRIVATE)
+                            .getBoolean("at_skip", true)
+                    ) {
+                        lastSet = raw
+                        return
+                    }
+                    // 纯数字不触发：剥掉已附加后缀后正文为纯数字（如 666、233、114514）时不触发；
+                    // 数字与文字/标点等其他组合（如"123啊""666！"）正常触发。
+                    if (isPureNumberText(raw)) {
+                        lastSet = raw
+                        return
+                    }
                     // === 核心处理：统一调用 transformFloat（与悬浮窗同一套逻辑，避免两套逻辑不一致导致bug）===
                     // doProcess 只负责读文本、写文本、光标恢复；替换/附加/去重/单行模式/增量还原全部走 transformFloat
                     // isDeleting 判断：只有 raw 是 lastSet 的前缀时才认为是用户在删除文字；
@@ -597,6 +611,16 @@ class AutomationBridge : AccessibilityService() {
             processing = false
             mainHandler.removeCallbacks(watchdogTask)
         }
+    }
+
+    /**
+     * 判断正文是否为纯数字（ASCII 0-9）：先剥掉已附加的后缀与规则（restoreUserInput），
+     * 若结果非空且每一位都是数字即为纯数字。
+     * 因此 "666""233" 不触发；"123啊""666！""123.45" 等含文字或标点的组合不是纯数字，正常触发。
+     */
+    private fun isPureNumberText(raw: String): Boolean {
+        val body = PhraseProcessor.restoreUserInput(raw)
+        return body.isNotEmpty() && body.all { it in '0'..'9' }
     }
 
     /**

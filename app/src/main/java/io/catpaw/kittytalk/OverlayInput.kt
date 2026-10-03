@@ -46,10 +46,10 @@ class OverlayInput(
         @Volatile
         private var instance: OverlayInput? = null
 
-        /** 悬浮窗当前是否处于“收起悬浮窗”状态：收起时不自动弹出悬浮窗打扰用户 */
+        /** 悬浮窗当前是否处于“收起成小球”状态：收起时不自动弹出悬浮窗打扰用户 */
         fun isCollapsed(): Boolean = instance != null && instance?.expanded == false
 
-        /** 悬浮窗当前是否存在（展开或收起悬浮窗都算打开） */
+        /** 悬浮窗当前是否存在（展开或收起成小球都算打开） */
         fun isOpen(): Boolean = instance != null
 
         /** 全局唯一悬浮窗：任何入口（主界面手动 / 无障碍写入被拦截）都复用同一个实例。
@@ -296,6 +296,20 @@ class OverlayInput(
         val isDeleting = lastSet.isNotEmpty() && raw.length < lastSet.length
         // 非无障碍模式也走同一套引擎：处理前重新加载最新配置（规则/后缀/触发开关/屏蔽符号）
         PhraseProcessor.reload(context)
+        // @不喵喵：开关开启时（默认开启）文本含@不触发，与无障碍主逻辑保持一致
+        if (raw.contains("@") && context.getSharedPreferences("qq_settings", Context.MODE_PRIVATE)
+                .getBoolean("at_skip", true)
+        ) {
+            lastSet = raw
+            return
+        }
+        // 纯数字不触发：剥掉后缀后正文为纯数字（如 666、233）时不触发，与主逻辑一致；
+        // 数字与文字/标点组合正常触发。
+        val numBody = PhraseProcessor.restoreUserInput(raw)
+        if (numBody.isNotEmpty() && numBody.all { it in '0'..'9' }) {
+            lastSet = raw
+            return
+        }
         val (target, cursor) = PhraseProcessor.transformFloat(raw, lastSet, isDeleting)
         if (target == raw) {
             lastSet = raw
