@@ -105,6 +105,15 @@ internal fun LauncherActivity.setupSentenceSuffixSwitch() {
     })
 }
 
+/** 主页"@不喵喵"开关：开启时文本含@一律不触发替换（默认开启） */
+internal fun LauncherActivity.setupAtSkipSwitch() {
+    binding.tabMain.atSkipSwitch.isChecked = darkPrefs().getBoolean(atSkipKey, true)
+    binding.tabMain.atSkipSwitch.setOnCheckedChangeListener { _, checked ->
+        darkPrefs().edit().putBoolean(atSkipKey, checked).apply()
+        AutomationBridge.instance?.reload()
+    }
+}
+
 internal fun LauncherActivity.updateFuncStatus() {
     val on = isFuncEnabled()
     binding.tabMain.funcSwitch.isChecked = on
